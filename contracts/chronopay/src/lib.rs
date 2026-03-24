@@ -4,7 +4,7 @@
 //! Includes pause/unpause emergency switch controlled by the contract admin.
 //! When paused, all state-mutating operations are blocked.
 
-use soroban_sdk::{contract, contractimpl, contracttype, vec, Env, String, Symbol, Vec, Address};
+use soroban_sdk::{contract, contractimpl, contracttype, vec, Address, Env, String, Symbol, Vec};
 
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
