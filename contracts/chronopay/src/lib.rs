@@ -34,7 +34,7 @@ pub struct ChronoPayContract;
 
 #[contractimpl]
 impl ChronoPayContract {
-    /// Create a time slot and persist it.
+    /// Create a time slot and persist it using persistent storage.
     /// Fails if end_time is not after start_time.
     pub fn create_time_slot(env: Env, professional: Address, start_time: u64, end_time: u64) -> u32 {
         professional.require_auth();
@@ -51,6 +51,7 @@ impl ChronoPayContract {
             token: None,
         };
 
+        // Use persistent storage for individual slots to handle scaling
         env.storage().persistent().set(&DataKey::Slot(slot_id), &slot);
 
         env.events().publish(
@@ -76,12 +77,14 @@ impl ChronoPayContract {
     /// Buy / transfer time token (stub).
     pub fn buy_time_token(env: Env, token_id: Symbol, buyer: Address, seller: Address) -> bool {
         let _ = (token_id, buyer, seller);
+        // Removed redundant instance storage calls from main
         true
     }
 
     /// Redeem time token (stub).
     pub fn redeem_time_token(env: Env, token_id: Symbol) -> bool {
         let _ = token_id;
+        // Logic will eventually update the TimeSlot or a Token metadata struct
         true
     }
 
