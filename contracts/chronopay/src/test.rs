@@ -14,6 +14,11 @@ fn test_hello() {
     let contract_id = env.register(ChronoPayContract, ());
     let client = ChronoPayContractClient::new(&env, &contract_id);
 
+// ── hello ─────────────────────────────────────────────────────────────────────
+
+#[test]
+fn test_hello() {
+    let (env, client) = setup();
     let words = client.hello(&String::from_str(&env, "Dev"));
     assert_eq!(
         words,
@@ -24,6 +29,8 @@ fn test_hello() {
         ]
     );
 }
+
+// ── create_time_slot: happy paths ─────────────────────────────────────────────
 
 #[test]
 fn test_initialize_and_metadata() {
